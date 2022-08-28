@@ -7,8 +7,16 @@
  app.use(cors());
  const carcont = require ("./controllers/car.controller")
  const todod = require("./controllers/todo.controller")
+ const aqua = require("./controllers/aqua.controllers")
+ const cart = require("./controllers/cart.controllers")
+ const {register,login} = require("./controllers/auth.controller")
 
 app.use("/car", carcont);
- app.use("/todo", todod)
+ app.use("/todo", todod);
+ app.use("/aquap",aqua);
+ app.use("/cartp",cart);
+ app.post("/register", register)
+
+app.post("/login", login)
 // app.use("/carcount", carcont)
  module.exports  = app;
