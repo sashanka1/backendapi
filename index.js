@@ -18,6 +18,6 @@ app.use("/car", carcont);
  app.post("/register", register)
 
 app.post("/login", login)
-app .patch("/update_address/:id",UpdateAddress)
+app.patch("/update_address/:id",UpdateAddress)
 // app.use("/carcount", carcont)
  module.exports  = app;
