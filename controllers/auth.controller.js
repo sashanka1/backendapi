@@ -29,8 +29,8 @@ const register = async (req, res) => {
 
 const UpdateAddress = async(req, res)=>{
     try {
-       
-            var user = await User.updateOne( { _id:req.params.id },{$push:{adresses:req.body}})
+       let theid = req.query.userId
+            var user = await User.updateOne( { _id:theid },{$push:{adresses:req.body}})
              //var user = await User.find(req.params.id)
             // console.log(req.body)
             res.status(201).send(user)

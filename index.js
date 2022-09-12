@@ -4,7 +4,9 @@
  const app = express();
 
  app.use(express.json());
- app.use(cors());
+ app.use(cors({
+    origin: 'http://localhost:3000'
+ }));
  const carcont = require ("./controllers/car.controller")
  const todod = require("./controllers/todo.controller")
  const aqua = require("./controllers/aqua.controllers")
@@ -18,6 +20,7 @@ app.use("/car", carcont);
  app.post("/register", register)
 
 app.post("/login", login)
-app.patch("/update_address/:id",UpdateAddress)
+app.patch("/update_address",UpdateAddress)
+
 // app.use("/carcount", carcont)
  module.exports  = app;
