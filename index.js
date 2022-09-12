@@ -9,7 +9,7 @@
  const todod = require("./controllers/todo.controller")
  const aqua = require("./controllers/aqua.controllers")
  const cart = require("./controllers/cart.controllers")
- const {register,login} = require("./controllers/auth.controller")
+ const {register,login,UpdateAddress} = require("./controllers/auth.controller")
 
 app.use("/car", carcont);
  app.use("/todo", todod);
@@ -18,5 +18,6 @@ app.use("/car", carcont);
  app.post("/register", register)
 
 app.post("/login", login)
+app .patch("/update_address/:id",UpdateAddress)
 // app.use("/carcount", carcont)
  module.exports  = app;

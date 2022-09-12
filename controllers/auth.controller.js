@@ -27,6 +27,20 @@ const register = async (req, res) => {
     }
 }
 
+const UpdateAddress = async(req, res)=>{
+    try {
+       
+            var user = await User.updateOne( { _id:req.params.id },{$push:{adresses:req.body}})
+             //var user = await User.find(req.params.id)
+            // console.log(req.body)
+            res.status(201).send(user)
+            
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 const login = async (req, res) => {
     try{
@@ -56,5 +70,5 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = {register,login}
+module.exports = {register,login,UpdateAddress}
 
