@@ -5,7 +5,7 @@
 
  app.use(express.json());
  app.use(cors({
-    origin: 'https://vercel.com/sashanka1/aqua-world/CXVnQZzBhqkNB1tdaDUrHZMdzooj'
+    origin: 'https://aqua-world.vercel.app/'
  }));
  const carcont = require ("./controllers/car.controller")
  const todod = require("./controllers/todo.controller")
