@@ -40,6 +40,20 @@ const UpdateAddress = async(req,res)=>{
         res.status(400).send({message : error.message})
     }
 }
+const deleteaddress = async(req,res)=>{ // delete an address
+    // db.profiles.updateOne( { _id: 1 }, { $pull: { votes: { $gte: 6 } } } ) pull method to remove from an array;
+    
+
+    try {
+        let userid = req.query.idofuser;
+    let removeAddressId = req.query.addressId;
+
+     await User.updateOne({_id:userid},{$pull:{adresses:{_id:removeAddressId}}} )
+    res.status(200).send({message:"remove done"})
+    } catch (error) {
+        res.status(400).send({message : error.message})
+    }
+}
 
 const userdata = async(req,res)=>{
     
@@ -81,5 +95,5 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = {register,login,UpdateAddress,userdata}
+module.exports = {register,login,UpdateAddress,userdata,deleteaddress}
 

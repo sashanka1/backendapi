@@ -11,7 +11,7 @@
  const todod = require("./controllers/todo.controller")
  const aqua = require("./controllers/aqua.controllers")
  const cart = require("./controllers/cart.controllers")
- const {register,login,UpdateAddress,userdata} = require("./controllers/auth.controller")
+ const {register,login,UpdateAddress,userdata,deleteaddress} = require("./controllers/auth.controller")
 
 app.use("/car", carcont);
  app.use("/todo", todod);
@@ -21,6 +21,7 @@ app.use("/car", carcont);
 
 app.post("/login", login)
 app.patch("/update_address",UpdateAddress)
+app.delete("/deleteaddress", deleteaddress) // delete the address of a perticular user;
 app.get("/userdata/:id",userdata)
 
 // app.use("/carcount", carcont)
