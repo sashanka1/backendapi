@@ -5,7 +5,7 @@
 
  app.use(express.json());
  app.use(cors({
-    origin: ['https://aqua-world.vercel.app', "http://localhost:3000"]
+    origin: ['https://aqua-world.vercel.app', "http://localhost:3000","https://todo-without-backend.netlify.app","https://todo-with-backend-sashanka.netlify.app"]
  }));
  const carcont = require ("./controllers/car.controller")
  const todod = require("./controllers/todo.controller")
