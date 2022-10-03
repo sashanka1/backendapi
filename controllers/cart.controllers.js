@@ -19,11 +19,34 @@ router.post("/", async(req,res)=>{ // add to the data base
 
 router.delete("/:id", async(req, res)=>{ // delete from  the database
     try {
+        
+  
+    
         const dedata_ofcart= await Cart.findByIdAndDelete(req.params.id).lean().exec();
         res.send(dedata_ofcart)
+    
+        
     } catch (error) {
         res.status(500).send(error)
     }
+  
+})
+
+
+
+router.delete("/", async(req, res)=>{ // delete from  the database
+    try {
+     let removeAll = req.query.all||"not"
+        
+    if(removeAll !=="not"){
+         await Cart.deleteMany({userId:removeAll});
+        res.status(201).send({message:"order placed"});
+    }
+   
+    } catch (error) {
+        res.status(500).send(error)
+    }
+  
   
 })
 
