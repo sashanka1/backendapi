@@ -11,13 +11,16 @@
  const todod = require("./controllers/todo.controller")
  const aqua = require("./controllers/aqua.controllers")
  const cart = require("./controllers/cart.controllers")
+ const order = require("./controllers/order.controllers")
  const {register,login,UpdateAddress,userdata,deleteaddress} = require("./controllers/auth.controller")
 
 app.use("/car", carcont);
  app.use("/todo", todod);
  app.use("/aquap",aqua);
  app.use("/cartp",cart);
+ app.use("/order",order)
  app.post("/register", register)
+
 
 app.post("/login", login)
 app.patch("/update_address",UpdateAddress)
