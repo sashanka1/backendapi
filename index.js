@@ -1,8 +1,8 @@
  const express = require ("express");
  const cors = require ("cors")
-
+ const  cookieParser = require('cookie-parser')
  const app = express();
-
+app.use(cookieParser());  // to use the cookie providing the npm packege to app;
  app.use(express.json());
  app.use(cors({
     origin: ['https://aqua-world.vercel.app', "http://localhost:3000","https://todo-without-backend.netlify.app","https://todo-with-backend-sashanka.netlify.app"]

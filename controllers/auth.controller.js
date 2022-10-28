@@ -19,8 +19,8 @@ const register = async (req, res) => {
         // if new user, create it or allow to register;
         user = await User.create(req.body);
 
-        const token = generateToken(user)
-        return res.status(200).send({user, token});
+        // const token = generateToken(user)
+        return res.status(200).send(user);
     }
     catch(err){
         res.status(400).send({message : err.message})
@@ -72,8 +72,9 @@ const login = async (req, res) => {
         
         const user = await User.findOne({email : req.body.email})
         //checked if mail exists
+        console.log(user,"the user")
         if(!user){
-            return res.status(400).send("Wrong Email or Password")
+            return res.status(400).send("Wrong Email or Password1")
         }
 
         //if email exists, check password;
@@ -81,11 +82,21 @@ const login = async (req, res) => {
 
         // if it doesn't match
         if(!match){
-            return res.status(400).send({message : "Wrong Email or Password"})
+            return res.status(400).send({message : "Wrong Email or Password2"})
         }
 
         // if it matches
-        const token = generateToken(user)
+        const token = generateToken(user) // generating token by calling generateToken function
+        console.log(user._id,"the user id")
+         await User.updateOne( { _id:user._id },{$push:{tokens:{val:token}}})
+  
+
+    res.cookie("jwt_cookie", token, {
+        expire:new Date(Date.now()+3000000),
+        httpsOnly:true,
+        
+    });
+        // console.log(cookie)
         return res.status(200).send({user, token});
 
 

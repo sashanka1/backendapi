@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
        "mobileNo":{type:String, require:true} ,
 
     },
+
+],
+tokens:[
+    {
+        "val":{type:String,require:true}
+    } 
 ]
 },{
     timestamps : true,
@@ -32,6 +38,10 @@ userSchema.pre("save", function(next){
 })
 
 userSchema.methods.checkPassword = function(password){
+    console.log(password,"insidecheck")
+    console.log(bcrypt.compareSync(password, this.password))
+   
+    console.log(this.password,"pass2")
     return bcrypt.compareSync(password, this.password);
 }
 
