@@ -19,8 +19,8 @@ const register = async (req, res) => {
         // if new user, create it or allow to register;
         user = await User.create(req.body);
 
-        // const token = generateToken(user)
-        return res.status(200).send(user);
+         const token = generateToken(user)
+        return res.status(200).send({user,token});
     }
     catch(err){
         res.status(400).send({message : err.message})
