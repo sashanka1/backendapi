@@ -22,7 +22,7 @@ router.get("/",async(req,res)=>{
    
     try {
         let theid = req.query.theuserid;
-    const allOrdersOfTheUser = await Order.find({uderId:theid})
+    const allOrdersOfTheUser = await Order.find({theUserId:theid})
     res.status(200).send(allOrdersOfTheUser) 
     } catch (error) {
         res.status(500).send({message:error.message})
