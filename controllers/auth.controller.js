@@ -104,7 +104,7 @@ const login = async (req, res) => {
             _id : user._id,
             token : token,
          }
-        // console.log(User,'-------------------------000000000000000000000')
+       
         return res.status(200).send({user:Userdata});
 
 
