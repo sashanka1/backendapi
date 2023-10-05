@@ -97,7 +97,7 @@ const login = async (req, res) => {
         
     });
         // console.log(cookie)
-         const User = {
+         const Userdata = {
             Name : user.username,
             adresses : user.adresses,
             email : user.email,
@@ -105,7 +105,7 @@ const login = async (req, res) => {
             token : token,
          }
          console.log(User,'-------------------------000000000000000000000')
-        return res.status(200).send({User});
+        return res.status(200).send({user:Userdata});
 
 
     }
