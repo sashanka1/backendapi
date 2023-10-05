@@ -72,9 +72,9 @@ const login = async (req, res) => {
         
         const user = await User.findOne({email : req.body.email})
         //checked if mail exists
-        console.log(user,"the user")
+        //console.log(user,"the user")
         if(!user){
-            return res.status(400).send("Wrong Email or Password1")
+            return res.status(400).send({message:"Wrong Email or Password1"})
         }
 
         //if email exists, check password;
@@ -87,7 +87,7 @@ const login = async (req, res) => {
 
         // if it matches
         const token = generateToken(user) // generating token by calling generateToken function
-        console.log(user._id,"the user id")
+       // console.log(user._id,"the user id")
          await User.updateOne( { _id:user._id },{$push:{tokens:{val:token}}})
   
 
@@ -97,7 +97,15 @@ const login = async (req, res) => {
         
     });
         // console.log(cookie)
-        return res.status(200).send({user, token});
+         const User = {
+            Name : user.username,
+            adresses : user.adresses,
+            email : user.email,
+            _id : user._id,
+            token : token,
+         }
+         console.log(User,'-------------------------000000000000000000000')
+        return res.status(200).send({User});
 
 
     }
