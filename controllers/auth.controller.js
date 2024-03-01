@@ -97,15 +97,15 @@ const login = async (req, res) => {
         
     });
         // console.log(cookie)
-        //  const Userdata = {
-        //     Name : user.username,
-        //     adresses : user.adresses,
-        //     email : user.email,
-        //     _id : user._id,
-        //     token : token,
-        //  }
+         const theUserData = {
+            Name : user.username,
+            adresses : user.adresses,
+            email : user.email,
+            _id : user._id,
+         }
+         console.log(ddata,"the data of the user modified====================")
        
-        return res.status(200).send({user,token});
+        return res.status(200).send({theUserData,token});
 
 
     }

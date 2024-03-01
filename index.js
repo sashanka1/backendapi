@@ -5,9 +5,10 @@
 app.use(cookieParser());  // to use the cookie providing the npm packege to app;
  app.use(express.json());
  app.use(cors({
-    origin: ['https://aqua-world.vercel.app', "http://localhost:3000","https://todo-without-backend.netlify.app","https://todo-with-backend-sashanka.netlify.app"]
+    origin: ['https://aqua-world.vercel.app', "http://localhost:3000","https://todo-without-backend.netlify.app","https://todo-with-backend-sashanka.netlify.app","https://spent-data.vercel.app"]
  }));
  const carcont = require ("./controllers/car.controller")
+ const spentcont = require ("./controllers/spent.controller")
  const todod = require("./controllers/todo.controller")
  const aqua = require("./controllers/aqua.controllers")
  const cart = require("./controllers/cart.controllers")
@@ -15,6 +16,7 @@ app.use(cookieParser());  // to use the cookie providing the npm packege to app;
  const {register,login,UpdateAddress,userdata,deleteaddress} = require("./controllers/auth.controller")
 
 app.use("/car", carcont);
+app.use("/spent", spentcont);
  app.use("/todo", todod);
  app.use("/aquap",aqua);
  app.use("/cartp",cart);
