@@ -103,7 +103,7 @@ const login = async (req, res) => {
             email : user.email,
             _id : user._id,
          }
-         console.log(ddata,"the data of the user modified====================")
+      //   console.log(ddata,"the data of the user modified====================")
        
         return res.status(200).send({theUserData,token});
 
