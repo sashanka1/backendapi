@@ -1,7 +1,8 @@
 
 const User = require("../models/user.model")
 const jwt = require('jsonwebtoken');
-require('dotenv').config()
+require('dotenv').config();
+
 
 const generateToken = (user) => {
     return jwt.sign({user}, process.env.SECRET_KEY)
@@ -69,43 +70,48 @@ const userdata = async(req,res)=>{
 
 const login = async (req, res) => {
     try{
-        
+     const {email,password} = req.body;
+
         const user = await User.findOne({email : req.body.email})
         //checked if mail exists
         //console.log(user,"the user")
         if(!user){
-            return res.status(400).send({message:"Wrong Email or Password1"})
+            return res.status(400).json({
+                status:400,
+                message:"Wrong Email Or Password"
+            })
         }
-
-        //if email exists, check password;
-        const match = user.checkPassword(req.body.password)
+        else{
+              //if email exists, check password;
+        const matchPassword = user.checkPassword(req.body.password)
 
         // if it doesn't match
         if(!match){
             return res.status(400).send({message : "Wrong Email or Password2"})
         }
+        else {
+            const token = jwt.sign({_id:user._id},process.env.SECRET_KEY);
+            res.cookie("jwt",token,{
+                expire: new Data(Date.now()+3000000)
+            });
+            const UserData = {
+                Name : user.username,
+                adresses : user.adresses,
+                email : user.email,
+                _id : user._id,
+             }
+          //   console.log(ddata,"the data of the user modified====================")
+           
+            return res.status(200).json({
+                status:200,
+                message:UserData
+            })
+        }
+        }
 
-        // if it matches
-        const token = generateToken(user) // generating token by calling generateToken function
-       // console.log(user._id,"the user id")
-         await User.updateOne( { _id:user._id },{$push:{tokens:{val:token}}})
-  
-
-    res.cookie("jwt_cookie", token, {
-        expire:new Date(Date.now()+3000000),
-        httpsOnly:true,
-        
-    });
+     
         // console.log(cookie)
-         const theUserData = {
-            Name : user.username,
-            adresses : user.adresses,
-            email : user.email,
-            _id : user._id,
-         }
-      //   console.log(ddata,"the data of the user modified====================")
        
-        return res.status(200).send({theUserData,token});
 
 
     }
