@@ -16,7 +16,7 @@ app.use(cookieParser());  // to use the cookie providing the npm packege to app;
  const cart = require("./controllers/cart.controllers")
  const order = require("./controllers/order.controllers")
  const {register,login,UpdateAddress,userdata,deleteaddress} = require("./controllers/auth.controller");
-const { validataSignUp } = require("./middlewares/validateSignUp");
+
 
 app.use("/car", carcont);
 app.use("/spent", spentcont);
