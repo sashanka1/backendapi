@@ -3,6 +3,7 @@ const validator = require("validator");
 
 const validataSignUp = (req,res,next)=>{
     try {
+        console.log(req.body,"called")
           if(req.body == {}){ // this check is important as empty 
           //  if we gat no data inside req.body ,
           //  we will get empty array of keys in Object.keys 
@@ -21,22 +22,24 @@ const validataSignUp = (req,res,next)=>{
         if(!isdatapresent){
             return res.status(400).json({
                 status:400,
-                message:"invalid data"
+                message:"invalid data- not complete data presend"
             });
         }
         else {
-            if(adresses[0] == []){
+            const {adresses} = req.body;
+            if(adresses.length === 0 ){
                 return res.status(400).json({
                     status:400,
-                    message:"invalid data"
+                    message:"invalid data- adress not defind"
                 });
             }
             const adressFields =  ["name","state","dist","areaPin","landmark","mobileNo"];
+            console.log(adresses,"tha adresses array")
           const isAllFieldsPresent =   Object.keys(req.body.adresses[0]).every(key=>adressFields.includes(key));
                 if(!isAllFieldsPresent){
                     return res.status(400).json({
                         status:400,
-                        message:"invalid data"
+                        message:"invalid data- complete adresses data not provided "
                     });
                 }
                 else{
@@ -55,14 +58,16 @@ const validataSignUp = (req,res,next)=>{
                   if(!checkNeme || !checkEmail || !isPassword || !isAdressName || !isState || !isDist || !isAreaPin || !isLandMark || !isNumber ){
                     return res.status(400).json({
                         status:400,
-                        message:"invalid data"
+                        message:"invalid data- one of the data field is not satisfaying the conditions of data format"
                     });
                   }
                 
                 }
-                next()
+                
             
         } 
+        console.log("called at end")
+        next()
     } catch (error) {
         res.status(400).send(error.message)
     }

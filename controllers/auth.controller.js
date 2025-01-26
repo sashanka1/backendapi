@@ -26,17 +26,20 @@ const register = async (req, res) => {
         message: "Account Already Exist Please Login",
       });
     }
-
-    // if new user, create it or allow to register;
-    user = await User.create(userData);
-    res.staus(200).json({
-      status: 200,
-      message: "signUp sucessful",
-    });
+      else{
+ // if new user, create it or allow to register;
+ const daveData = await User.create(userData);
+ console.log(daveData,"the saved data")
+ res.status(200).json({
+   status: 200,
+   message: "SignUp successful",
+ });
+      }
+   
   } catch (err) {
     res.status(400).json({
-      ststus: 401,
-      message: err.message,
+      ststus: 400,
+      message: err
     });
   }
 };
@@ -107,8 +110,8 @@ const login = async (req, res) => {
         });
       } else {
         const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
-        res.cookie("jwt", token, {
-          expire: new Data(Date.now() + 3000000),
+        res.cookie("JWT", token, {
+          expire: new Date(Date.now() + 3000000),
         });
         const UserData = {
           Name: user.username,
