@@ -5,8 +5,11 @@
 app.use(cookieParser());  // to use the cookie providing the npm packege to app;
  app.use(express.json());
  app.use(cors({
-    origin: ['https://aqua-world.vercel.app', "http://localhost:3000","https://todo-without-backend.netlify.app","https://todo-with-backend-sashanka.netlify.app","https://spent-data.vercel.app",]
- }));
+    origin: ['https://aqua-world.vercel.app', "http://localhost:3000","https://todo-without-backend.netlify.app","https://todo-with-backend-sashanka.netlify.app","https://spent-data.vercel.app",],
+    credentials:true
+ },
+
+));
  const {validataLogin} = require("./middlewares/validateLogin")
  const {validataSignUp} = require("./middlewares/validateSignUp")
  const carcont = require ("./controllers/car.controller")
